@@ -10,8 +10,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'hdima/python-syntax'
+Plugin 'indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
@@ -35,13 +35,14 @@ let g:python_highlight_all = 1
 " Syntastic settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
 " Powerline fonts
-let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 1
 
 " Remap arrow keys in normal and insert mode
 noremap <Up> <nop>
