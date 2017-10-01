@@ -34,6 +34,12 @@ set number
 
 set backspace=start,indent,eol
 
+" search into subfolders
+set path+=**
+
+" Display matching folders on tab complete
+set wildmenu
+
 " Stop delay when pressing ESC in insert mode
 set timeoutlen=1000 ttimeoutlen=0
 
