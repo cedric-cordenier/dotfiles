@@ -6,14 +6,13 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'elzr/vim-json'
 Plugin 'raimondi/delimitmate'
 Plugin 'mhinz/vim-grepper'
 Plugin 'junegunn/fzf'
+Plugin 'itchyny/lightline.vim'
 
 " Language support
 
@@ -55,15 +54,24 @@ colorscheme Tomorrow-Night
 " Python highlighting
 let g:python_highlight_all = 1
 
-" Airline customisations
-let g:airline_powerline_fonts = 1
-let g:airline_highlighting_cache = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_extensions = ['tabline']
+" ALE
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
 
-" Syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" Lightline
+set laststatus=2
+
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'file', 'filename' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
 
 " Set where splits are opened
 set splitright splitbelow
