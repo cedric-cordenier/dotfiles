@@ -6,14 +6,14 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'kien/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'elzr/vim-json'
 Plugin 'raimondi/delimitmate'
-Plugin 'mileszs/ack.vim'
+Plugin 'mhinz/vim-grepper'
+Plugin 'junegunn/fzf'
 
 " Language support
 
@@ -31,6 +31,12 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 set number
+
+" allow opening new buffers if current is unsaved
+set hidden
+
+" incremental search
+set incsearch
 
 set backspace=start,indent,eol
 
@@ -62,17 +68,6 @@ let g:syntastic_auto_loc_list = 1
 " Set where splits are opened
 set splitright splitbelow
 
-" Ctrlp configuration - open as vertical split by default
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-v>'],
-    \ 'AcceptSelection("v")': ['<cr>'],
-    \ }
-
-" Ctrlp configuration - custom ignore
-let g:ctrlp_custom_ignore = {
-   \ 'dir': '\.git$\|frontend$|node_modules|migrations',
-   \ 'files': '\.pyc$|\.js$' }
-
 " Netrw configuration
 let g:netrw_list_hide='.*\.swp$,.*\.pyc'
 
@@ -96,6 +91,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" FZF map to ctrlp
+nnoremap <C-P> :FZF<cr>
+
 " Specify location of tags:
 " For each project in ~/Developer the tags are
 " located at ~/Developer/.<project-name>-tags
@@ -107,4 +105,3 @@ if getcwd() =~ g:projectsDir
     let &tags=g:currentProjectTags
   endif
 endif
-set tags=tags;/
