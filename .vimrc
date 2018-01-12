@@ -13,6 +13,7 @@ Plugin 'raimondi/delimitmate'
 Plugin 'mhinz/vim-grepper'
 Plugin 'junegunn/fzf'
 Plugin 'itchyny/lightline.vim'
+Plugin 'ap/vim-buftabline'
 
 " Language support
 
@@ -25,6 +26,9 @@ Plugin 'fatih/vim-go'
 
 " Coffeescript
 Plugin 'kchmck/vim-coffee-script'
+
+" Elixir
+Plugin 'elixir-editors/vim-elixir'
 
 call vundle#end()
 filetype plugin indent on
@@ -55,6 +59,7 @@ colorscheme Tomorrow-Night
 let g:python_highlight_all = 1
 
 " ALE
+let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
@@ -64,6 +69,7 @@ highlight link ALEErrorSign Title
 set laststatus=2
 
 let g:lightline = {
+  \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'file', 'filename' ] ]
