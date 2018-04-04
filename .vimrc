@@ -8,12 +8,15 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'w0rp/ale'
-Plugin 'elzr/vim-json'
 Plugin 'raimondi/delimitmate'
 Plugin 'mhinz/vim-grepper'
 Plugin 'junegunn/fzf'
 Plugin 'itchyny/lightline.vim'
 Plugin 'ap/vim-buftabline'
+Plugin 'maralla/completor.vim'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-surround'
+Plugin 'aserebryakov/vim-todo-lists'
 
 " Language support
 
@@ -104,6 +107,14 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Add default indentation for unknown filetypes
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal textwidth=80
+setlocal smarttab
+setlocal expandtab
 
 " FZF map to ctrlp
 nnoremap <C-P> :FZF<cr>
