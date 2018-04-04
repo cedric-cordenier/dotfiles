@@ -116,6 +116,9 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 
+" FZF
+" Make FZF respect gitignore (requires the_silver_searcher brew package)
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " FZF map to ctrlp
 nnoremap <C-P> :FZF<cr>
 
