@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'w0rp/ale'
+Plugin 'maximbaz/lightline-ale'
 Plugin 'raimondi/delimitmate'
 Plugin 'mhinz/vim-grepper'
 Plugin 'junegunn/fzf'
@@ -15,6 +16,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'aserebryakov/vim-todo-lists'
 
 " Language support
@@ -66,6 +68,9 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+
+let g:ale_fixers = {'python': ['autopep8', 'isort', 'trim_whitespace']}
+let g:ale_fix_on_save = 1
 
 " Lightline
 set laststatus=2
