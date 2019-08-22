@@ -12,14 +12,20 @@ Plugin 'maximbaz/lightline-ale'
 Plugin 'raimondi/delimitmate'
 Plugin 'mhinz/vim-grepper'
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'aserebryakov/vim-todo-lists'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'janko-m/vim-test'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'chrisbra/csv.vim'
 
+"
 " Language support
+"
 
 " Python
 Plugin 'hdima/python-syntax'
@@ -69,8 +75,14 @@ let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 
-let g:ale_fixers = {'python': ['autopep8', 'isort', 'trim_whitespace']}
+let g:ale_fixers = {'python': ['autopep8', 'isort', 'trim_whitespace'], 'javascript': ['prettier']}
 let g:ale_fix_on_save = 1
+
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_lint_on_save = 1
+
+let g:ale_python_autopep8_options = '--max-line-length=100'
+
 
 " Lightline
 set laststatus=2
@@ -112,6 +124,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Remap // to search for visual selection
+vnoremap // y/<C-R>"<CR>"
+
 " Add default indentation for unknown filetypes
 setlocal tabstop=4
 setlocal softtabstop=4
@@ -120,20 +135,22 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 
+" Copy to the system clipboard by default
+set clipboard=unnamed
+
 " FZF
 " Make FZF respect gitignore (requires the_silver_searcher brew package)
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " FZF map to ctrlp
 nnoremap <C-P> :FZF<cr>
+nnoremap <C-F> :Tags<cr>
 
-" Specify location of tags:
-" For each project in ~/Developer the tags are
-" located at ~/Developer/.<project-name>-tags
-let g:projectsDir = $HOME."/Developer/"
-if getcwd() =~ g:projectsDir
-  let g:currentProject = split(getcwd(), '/')[3]
-  let g:currentProjectTags = g:projectsDir.".".g:currentProject."-tags"
-  if filereadable(g:currentProjectTags)
-    let &tags=g:currentProjectTags
-  endif
-endif
+" Grepper abbreviations
+cmap GW Grepper -query <C-R><C-W>
+cmap GQ Grepper -query 
+cmap PF !pytest % -s
+
+" Jedi - disable completions because they are annoying
+let g:jedi#completions_enabled = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#smart_auto_mappings = 0
