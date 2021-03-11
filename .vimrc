@@ -18,32 +18,26 @@ Plugin 'ap/vim-buftabline'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'janko-m/vim-test'
-Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'chrisbra/csv.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
 
 "
 " Language support
 "
 
-" Python
-Plugin 'hdima/python-syntax'
-Plugin 'indentpython.vim'
-
 " Go
 Plugin 'fatih/vim-go'
 
-" Coffeescript
-Plugin 'kchmck/vim-coffee-script'
-
-" Elixir
-Plugin 'elixir-editors/vim-elixir'
-
 call vundle#end()
+
 filetype plugin indent on
 syntax on
 set number
+
+let mapleader=" "
+map <Leader> <Plug>(easymotion-prefix)
 
 " allow opening new buffers if current is unsaved
 set hidden
@@ -65,9 +59,6 @@ set timeoutlen=1000 ttimeoutlen=0
 " Colorscheme
 colorscheme Tomorrow-Night
 
-" Python highlighting
-let g:python_highlight_all = 1
-
 " ALE
 let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '▲'
@@ -75,14 +66,19 @@ let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 
-let g:ale_fixers = {'python': ['autopep8', 'isort', 'trim_whitespace'], 'javascript': ['prettier']}
+let g:ale_fixers = {
+  \ 'javascript': ['prettier'],
+  \ 'go': ['gofmt', 'remove_trailing_lines', 'trim_whitespace', 'goimports'],
+  \ }
 let g:ale_fix_on_save = 1
 
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {
+  \ 'ruby': ['brakeman', 'rails_best_practices', 'reek', 'rubocop', 'ruby', 'solargraph', 'standardrb'],
+  \ 'go': ['gofmt', 'gobuild'],
+  \ }
 let g:ale_lint_on_save = 1
 
-let g:ale_python_autopep8_options = '--max-line-length=100'
-
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 " Lightline
 set laststatus=2
@@ -103,6 +99,8 @@ set splitright splitbelow
 
 " Netrw configuration
 let g:netrw_list_hide='.*\.swp$,.*\.pyc'
+let g:netrw_altv=1
+let g:netrw_rmdir_cmd='rm -r'
 
 " Vim-json config
 let g:vim_json_syntax_conceal = 0
@@ -143,14 +141,32 @@ set clipboard=unnamed
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " FZF map to ctrlp
 nnoremap <C-P> :FZF<cr>
-nnoremap <C-F> :Tags<cr>
+nnoremap <C-G> :Ag<cr>
 
 " Grepper abbreviations
-cmap GW Grepper -query <C-R><C-W>
-cmap GQ Grepper -query 
+cmap GW Grepper -noprompt -query <C-R><C-W><CR>
+cmap GQ Grepper -noprompt -query
 cmap PF !pytest % -s
+cmap RF terminal bundle exec rspec %
+cmap GT GoTest
 
-" Jedi - disable completions because they are annoying
-let g:jedi#completions_enabled = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#smart_auto_mappings = 0
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+  \ 'ruby': ['/usr/local/bin/solargraph', 'stdio'],
+  \ 'go': ['gopls'],
+ \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+" Allow % to work with do end blocks
+runtime! macros/matchit.vim
+
+" Get path + current line and copy it
+"
+cmap CL echo @% . ':' . line('.')<CR>
+
+cmap GS ?import (<Esc>o"github.com/davecgh/go-spew/spew"<Esc><CR>
+
+let g:LanguageClient_loggingFile =  expand('~/tmp/nvim/LanguageClient.log')

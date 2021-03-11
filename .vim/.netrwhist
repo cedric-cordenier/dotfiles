@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/Users/cedriccordenier/src/cedric-cordenier/repo'
+let g:netrw_dirhist_0='/Users/cedriccordenier/src/cedric-cordenier/repo/users/directory/internal/store'
+let g:netrw_dirhist_9='/Users/cedriccordenier/src/cedric-cordenier/repo'
+let g:netrw_dirhist_8='/Users/cedriccordenier/src/cedric-cordenier/repo/users/directory/internal/services/directory'
+let g:netrw_dirhist_7='/Users/cedriccordenier/src/cedric-cordenier/repo'
+let g:netrw_dirhist_6='/Users/cedriccordenier/Development/goscripts/cod-interview/41'
+let g:netrw_dirhist_5='/Users/cedriccordenier/src/cedric-cordenier/repo'
+let g:netrw_dirhist_4='/Users/cedriccordenier/src/cedric-cordenier/repo/users/directory/protos/coinbase/user/directory'
+let g:netrw_dirhist_3='/Users/cedriccordenier/src/cedric-cordenier/repo/users/directory/internal/services/directory'
+let g:netrw_dirhist_2='/Users/cedriccordenier/src/cedric-cordenier/repo'
