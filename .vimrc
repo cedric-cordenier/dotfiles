@@ -73,7 +73,6 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-  \ 'ruby': ['brakeman', 'rails_best_practices', 'reek', 'rubocop', 'ruby', 'solargraph', 'standardrb'],
   \ 'go': ['gofmt', 'gobuild'],
   \ }
 let g:ale_lint_on_save = 1
@@ -152,13 +151,15 @@ cmap GT GoTest
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
-  \ 'ruby': ['/usr/local/bin/solargraph', 'stdio'],
   \ 'go': ['gopls'],
+  \ 'solidity': ['/opt/homebrew/bin/solc', '--lsp'],
  \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+let g:LanguageClient_rootMarkers = ['.git']
 
 " Allow % to work with do end blocks
 runtime! macros/matchit.vim
@@ -168,5 +169,3 @@ runtime! macros/matchit.vim
 cmap CL echo @% . ':' . line('.')<CR>
 
 cmap GS ?import (<Esc>o"github.com/davecgh/go-spew/spew"<Esc><CR>
-
-let g:LanguageClient_loggingFile =  expand('~/tmp/nvim/LanguageClient.log')

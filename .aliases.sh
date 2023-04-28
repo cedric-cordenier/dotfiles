@@ -1,24 +1,13 @@
 # Git aliases
 alias gm="git checkout master"
-alias gch="git chekcout payments/cedric/$1"
 alias gp="git pull"
 alias grf="git diff --name-status master | awk '{ print \$2 }'"
-
-# Create a branch with payments/cedric in front of the branch name
-function gcr () {
-    git checkout -b payments/cedric/$1
-}
 
 # Bundle aliases
 alias be="bundle exec"
 
 # Remove swapfiles
 alias cln="find . -type f -name '*.sw[klmnop]' -delete"
-
-# Create a branch with payments/cedric in front of the branch name
-function gcr () {
-    git checkout -b payments/cedric/$1
-}
 
 # Rubocop
 alias rh="grf | xargs bundle exec rubocop"
